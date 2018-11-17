@@ -143,6 +143,13 @@ def display_bulb(idx):
     +bulb_ip + ",model=" + model \
     +",power=" + power + ",bright=" \
     + bright + ",rgb=" + rgb)
+  return {
+          "ip": bulb_ip,
+          "model": model,
+          "power": power,
+          "bright": bright,
+          "rgb": rgb
+          }
 
 def display_bulbs():
   print (str(len(detected_bulbs)) + " managed bulbs")
@@ -182,6 +189,12 @@ def set_bright(idx, bright):
 
 def set_color(idx, hex_color):
   operate_on_bulb(idx, "set_rgb", str(int(hex_color, 16)))
+
+def refresh_bulbs():
+  detected_bulbs.clear()
+  bulb_idx2ip.clear()
+  send_search_broadcast()
+  sleep(0.5)
 
 def print_cli_usage():
   print ("Usage:")
